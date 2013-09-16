@@ -10,23 +10,21 @@ Also included is a well documented demo of the functionality of the class. This 
 
 ## Example
 
-'''C#
-//Get the details of all connected USB HID devices
-HIDDevice.interfaceDetails[] devices = HIDDevice.getConnectedDevices(); 
+ //Get the details of all connected USB HID devices
+ HIDDevice.interfaceDetails[] devices = HIDDevice.getConnectedDevices(); 
  
-//Select a device from the available devices
-string devicePath = devices[selectedDeviceIndex].devicePath;
+ //Select a device from the available devices
+ string devicePath = devices[selectedDeviceIndex].devicePath;
  
-//create a handle to the device by calling the constructor
-HIDDevice device = new HIDDevice(devicePath, false);
+ //create a handle to the device by calling the constructor
+ HIDDevice device = new HIDDevice(devicePath, false);
  
-//Write a byte array to the device
-byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
-device.write(writeData);    //Its that easy!!
+ //Write a byte array to the device
+ byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
+ device.write(writeData);    //Its that easy!!
  
-//Read a byte array from the device
-byte[] readData = device.read();    //again, that easy!
+ //Read a byte array from the device
+ byte[] readData = device.read();    //again, that easy!
  
-//close the device to release all handles etc
-device.close();
-'''
+ //close the device to release all handles etc
+ device.close();
