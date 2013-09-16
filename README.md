@@ -9,7 +9,7 @@ The code will build under .NET 2.0, and uses only the APIs available as far back
 Also included is a well documented demo of the functionality of the class. This is a console app which implements synchronous and asynchonous operation of the class.
 
 ## Example
-
+```
  //Get the details of all connected USB HID devices
  HIDDevice.interfaceDetails[] devices = HIDDevice.getConnectedDevices(); 
  
@@ -28,3 +28,4 @@ Also included is a well documented demo of the functionality of the class. This 
  
  //close the device to release all handles etc
  device.close();
+```
