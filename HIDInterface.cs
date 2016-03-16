@@ -419,7 +419,7 @@ namespace HIDInterface
 
             //use a filestream object to bring this stuff into .NET
             FS_read = new FileStream(handle_read, FileAccess.ReadWrite, capabilities.OutputReportByteLength, false);
-            FS_write = new FileStream(handle_write, FileAccess.ReadWrite, capabilities.OutputReportByteLength, false);
+            FS_write = new FileStream(handle_write, FileAccess.ReadWrite, capabilities.InputReportByteLength, false);
 
             this.useAsyncReads = useAsyncReads;
             if (useAsyncReads)
