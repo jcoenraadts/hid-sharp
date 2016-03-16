@@ -4,7 +4,7 @@ Hid-Sharp is designed to take the pain out of communicating with HID (human inte
 
 For an existing project, all you require is the HIDInterface.cs class. This class is a wrapper for the Win32 API calls required for USB operation. It implements simple read/write functions and generates events on asynchronous transmissions.
 
-The code will build under .NET 2.0, and uses only the APIs available as far back as WinXP. It hsa been tested under XP, Vista and Win7. (Win8 feedback would be interesting!)
+The code will build under .NET 2.0, and uses only the APIs available as far back as WinXP. It hsa been tested under XP, Vista and Win7 and Win8
 
 Also included is a well documented demo of the functionality of the class. This is a console app which implements synchronous and asynchonous operation of the class.
 
