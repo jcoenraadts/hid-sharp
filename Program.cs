@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +45,7 @@ namespace HID_Demo
             int selectedDeviceIndex = 0;
             ushort VID = devices[selectedDeviceIndex].VID;
             ushort PID = devices[selectedDeviceIndex].PID;
-            int SN = devices[selectedDeviceIndex].serialNumber;
+            string SN = devices[selectedDeviceIndex].serialNumber;
             string devicePath = devices[selectedDeviceIndex].devicePath;
 
             //create a handle to the device by calling the constructor of the HID class
@@ -79,7 +79,7 @@ namespace HID_Demo
             int selectedDeviceIndex = 0;
             ushort VID = devices[selectedDeviceIndex].VID;
             ushort PID = devices[selectedDeviceIndex].PID;
-            int SN = devices[selectedDeviceIndex].serialNumber;
+            string SN = devices[selectedDeviceIndex].serialNumber;
             string devicePath = devices[selectedDeviceIndex].devicePath;
 
             //create a handle to the device by calling the constructor of the HID class

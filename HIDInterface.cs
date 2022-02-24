@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
@@ -129,7 +129,7 @@ namespace HIDInterface
         {
             public string manufacturer;
             public string product;
-            public int serialNumber;
+            public string serialNumber;
             public ushort VID;
             public ushort PID;
             public string devicePath;
@@ -302,10 +302,8 @@ namespace HIDInterface
                 productInfo.versionNumber = (ushort)attributes.VersionNumber;
                 productInfo.IN_reportByteLength = (int)capabilities.InputReportByteLength;
                 productInfo.OUT_reportByteLength = (int)capabilities.OutputReportByteLength;
-                
-                if (stringIsInteger(SN))
-                    productInfo.serialNumber = Convert.ToInt32(SN);     //Check that serial number is actually a number
-                
+                productInfo.serialNumber = SN;
+
                 int newSize = devices.Length + 1;
                 Array.Resize(ref devices, newSize);
                 devices[newSize - 1] = productInfo;
@@ -327,14 +325,14 @@ namespace HIDInterface
         /// <param name="PID">The product ID of the USB device to connect to</param>
         /// <param name="serialNumber">The serial number of the USB device to connect to</param>
         /// <param name="useAsyncReads">True - Read the device and generate events on data being available</param>
-        public HIDDevice(ushort VID, ushort PID, ushort serialNumber, bool useAsyncReads)
+        public HIDDevice(ushort VID, ushort PID, string serialNumber, bool useAsyncReads)
         {
             interfaceDetails[] devices = getConnectedDevices();
-            
+
             //loop through all connected devices to find one with the correct details
             for (int i = 0; i < devices.Length; i++)
             {
-                if ((devices[i].VID == VID) && (devices[i].PID == PID) && (devices[i].serialNumber == (int)serialNumber))
+                if ((devices[i].VID == VID) && (devices[i].PID == PID) && (devices[i].serialNumber == serialNumber))
                     initDevice(devices[i].devicePath, useAsyncReads);
             }
 
@@ -410,7 +408,7 @@ namespace HIDInterface
             productInfo.devicePath = devicePath;
             productInfo.manufacturer = manfString;
             productInfo.product = productName;
-            productInfo.serialNumber = Convert.ToInt32(SN);
+            productInfo.serialNumber = SN;
             productInfo.PID = (ushort)attributes.ProductID;
             productInfo.VID = (ushort)attributes.VendorID;
             productInfo.versionNumber = (ushort)attributes.VersionNumber;
@@ -432,7 +430,7 @@ namespace HIDInterface
                 FS_read.Close();
             if (FS_write != null)
                 FS_write.Close();
-            
+
             if ((handle_read != null) && (!(handle_read.IsInvalid)))
                 handle_read.Close();
             if ((handle_write != null) && (!(handle_write.IsInvalid)))
@@ -441,7 +439,7 @@ namespace HIDInterface
             this.deviceConnected = false;
         }
 
-        public void write(byte[] data)  
+        public void write(byte[] data)
         {
             if (data.Length > capabilities.OutputReportByteLength)
                 throw new Exception("Output report must not exceed " + (capabilities.OutputReportByteLength - 1).ToString() + " bytes");
@@ -480,7 +478,7 @@ namespace HIDInterface
 
             dataReceived(readData);                                     //triggers the event to be heard by the calling class
         }
-        
+
         /// <summary>
         /// This read function is for normal synchronous reads
         /// </summary>
