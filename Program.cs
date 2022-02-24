@@ -57,9 +57,9 @@ namespace HID_Demo
             //HIDDevice device = new HIDDevice(VID, PID, (ushort)SN, false);
 
             //Write some data to the device (the write method throws an exception if the data is longer than the report length
-            //specified by the device, this length can be found in the HIDDevice.interfaceDetails struct)
-            byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
-            device.write(writeData);    //Its that easy!!
+            ////specified by the device, this length can be found in the HIDDevice.interfaceDetails struct)
+            //byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
+            //device.write(writeData);    //Its that easy!!
 
             //Read some data synchronously from the device. This method blocks the calling thread until the data
             //is returned. This takes 1-20ms for most HID devices
@@ -96,8 +96,8 @@ namespace HID_Demo
             //Write some data to the device (the write method throws an exception if the data is longer than the report length
             //specified by the device, this length can be found in the HIDDevice.interfaceDetails struct)
             //The write method is identical to the synchronous mode of operation
-            byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
-            device.write(writeData);    //Its that easy!!
+            //byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
+            //device.write(writeData);    //Its that easy!!
 
             //Send your program off to do other stuff here, wait for UI events etc
             //When a report occurs, the device_dataReceived(byte[] message) method will be called
