@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +45,7 @@ namespace HID_Demo
             int selectedDeviceIndex = 0;
             ushort VID = devices[selectedDeviceIndex].VID;
             ushort PID = devices[selectedDeviceIndex].PID;
-            int SN = devices[selectedDeviceIndex].serialNumber;
+            string SN = devices[selectedDeviceIndex].serialNumber;
             string devicePath = devices[selectedDeviceIndex].devicePath;
 
             //create a handle to the device by calling the constructor of the HID class
@@ -57,9 +57,9 @@ namespace HID_Demo
             //HIDDevice device = new HIDDevice(VID, PID, (ushort)SN, false);
 
             //Write some data to the device (the write method throws an exception if the data is longer than the report length
-            //specified by the device, this length can be found in the HIDDevice.interfaceDetails struct)
-            byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
-            device.write(writeData);    //Its that easy!!
+            ////specified by the device, this length can be found in the HIDDevice.interfaceDetails struct)
+            //byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
+            //device.write(writeData);    //Its that easy!!
 
             //Read some data synchronously from the device. This method blocks the calling thread until the data
             //is returned. This takes 1-20ms for most HID devices
@@ -79,7 +79,7 @@ namespace HID_Demo
             int selectedDeviceIndex = 0;
             ushort VID = devices[selectedDeviceIndex].VID;
             ushort PID = devices[selectedDeviceIndex].PID;
-            int SN = devices[selectedDeviceIndex].serialNumber;
+            string SN = devices[selectedDeviceIndex].serialNumber;
             string devicePath = devices[selectedDeviceIndex].devicePath;
 
             //create a handle to the device by calling the constructor of the HID class
@@ -96,12 +96,12 @@ namespace HID_Demo
             //Write some data to the device (the write method throws an exception if the data is longer than the report length
             //specified by the device, this length can be found in the HIDDevice.interfaceDetails struct)
             //The write method is identical to the synchronous mode of operation
-            byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
-            device.write(writeData);    //Its that easy!!
+            //byte[] writeData = { 0x00, 0x01, 0x02, 0x03, 0x04 };
+            //device.write(writeData);    //Its that easy!!
 
             //Send your program off to do other stuff here, wait for UI events etc
             //When a report occurs, the device_dataReceived(byte[] message) method will be called
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(100000);
 
             //close the device to release all handles etc
             device.close();
@@ -110,7 +110,13 @@ namespace HID_Demo
         //Whenever a report comes in, this method will be called and the data will be available! Like magic...
         void device_dataReceived(byte[] message)
         {
-            //Do something with the data here...
+            string data_str = "";
+            for (var Index = 0; Index < message.Length; Index++)
+            {
+                data_str += message[Index].ToString("X2");
+                data_str += "-";
+            }
+            Console.WriteLine(data_str);
         }
     }
 }
