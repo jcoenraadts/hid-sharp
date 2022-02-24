@@ -416,9 +416,14 @@ namespace HIDInterface
             productInfo.OUT_reportByteLength = (int)capabilities.OutputReportByteLength;
 
             //use a filestream object to bring this stuff into .NET
-            FS_read = new FileStream(handle_read, FileAccess.ReadWrite, capabilities.OutputReportByteLength, false);
-            FS_write = new FileStream(handle_write, FileAccess.ReadWrite, capabilities.InputReportByteLength, false);
-
+            if (capabilities.InputReportByteLength > 0)
+            {
+                FS_read = new FileStream(handle_read, FileAccess.ReadWrite, capabilities.InputReportByteLength, false);
+            }
+            if (capabilities.OutputReportByteLength > 0)
+            {
+                FS_write = new FileStream(handle_write, FileAccess.ReadWrite, capabilities.OutputReportByteLength, false);
+            }
             this.useAsyncReads = useAsyncReads;
             if (useAsyncReads)
                 readAsync();
