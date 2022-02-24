@@ -101,7 +101,7 @@ namespace HID_Demo
 
             //Send your program off to do other stuff here, wait for UI events etc
             //When a report occurs, the device_dataReceived(byte[] message) method will be called
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(100000);
 
             //close the device to release all handles etc
             device.close();
@@ -110,7 +110,13 @@ namespace HID_Demo
         //Whenever a report comes in, this method will be called and the data will be available! Like magic...
         void device_dataReceived(byte[] message)
         {
-            //Do something with the data here...
+            string data_str = "";
+            for (var Index = 0; Index < message.Length; Index++)
+            {
+                data_str += message[Index].ToString("X2");
+                data_str += "-";
+            }
+            Console.WriteLine(data_str);
         }
     }
 }
